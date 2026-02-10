@@ -136,7 +136,6 @@
         const [dataUrl, wasmUrl, frameworkUrl] = await Promise.all([
           mergeParts(dataParts),
           mergeParts(wasmParts),
-          mergeParts(loaderParts),
           mergeParts(["Build/framework.js"], 'application/javascript')
         ]);
 
