@@ -127,15 +127,17 @@
 
     (async () => {
       try {
-        const dataParts = getParts("Build/data.br", 2);
-        const wasmParts = getParts("Build/wasm.br", 3);
-        const allParts = [...dataParts, ...wasmParts, "Build/framework.js"];
+        const dataParts = getParts("Build/data.br", 1);
+        const wasmParts = getParts("Build/wasm.br", 1);
+        const loaderParts = getParts("Build/loader.br", 1);
+        const allParts = [...dataParts, ...wasmParts, ...loaderParts, "Build/framework.js"];
         const sizes = await Promise.all(allParts.map(getSize));
         totalBytes = sizes.reduce((a, b) => a + b, 0);
 
         const [dataUrl, wasmUrl, frameworkUrl] = await Promise.all([
           mergeParts(dataParts),
           mergeParts(wasmParts),
+          mergeParts(loaderParts),
           mergeParts(["Build/framework.js"], 'application/javascript')
         ]);
 
