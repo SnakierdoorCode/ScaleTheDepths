@@ -128,7 +128,7 @@
     (async () => {
       try {
         const dataParts = getParts("Build/data.br", 2);
-        const wasmParts = getParts("Build/wasm.br", 0);
+        const wasmParts = getParts("Build/wasm.br", 2);
         const allParts = [...dataParts, ...wasmParts, "Build/framework.js"];
         const sizes = await Promise.all(allParts.map(getSize));
         totalBytes = sizes.reduce((a, b) => a + b, 0);
